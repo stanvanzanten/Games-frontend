@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="row text-center">
+  <div class="col-xs-12">
+    <h1>Welkom op de developers page! Hier is een overzicht te zien van alle developers en hun gemaakte games.
+      De games zijn te bekijken door op de developer te klikken!</h1><br>
+    <hr class="style13">
+  </div>
+</div>
+<div class="row text-center">
+  <div class="col-xs-4">
+    <div class="panel panel-default list-group-item" style="cursor: pointer" *ngFor="let developer of developers; let i = index"
+      (click)="onEditItem(i)">
+      <table class="table">
+        <tr>
+          <th class="text-center">Name</th>
+          <th class="text-center">Age</th>
+          <th class="text-center">Games</th>
+        </tr>
+        <tr>
+          <td>{{ developer.name }}</td>
+          <td>{{ developer.age }}</td>
+          <td>{{ developer.games }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+    <div class="col-xs-8">
+      <app-developer-edit></app-developer-edit>
+    </div>
+</div>

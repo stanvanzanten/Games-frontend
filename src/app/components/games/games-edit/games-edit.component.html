@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label for="imageUrl">Image</label>
+          <input type="text" id="imageUrl" class="form-control" name="imageUrl" ngModel required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <label for="name">naam</label>
+          <input type="text" id="name" class="form-control" name="name" ngModel required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label for="releaseDate">ReleaseDate</label>
+          <input type="text" id="releaseDate" class="form-control" name="releaseDate" ngModel required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <label for="genre">Genre</label>
+          <input type="text" id="genre" class="form-control" name="genre" ngModel required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" class="form-control" name="description" ngModel required>
+        </div>
+        <div class="col-sm-4 form-group" *ngIf="!editMode">
+          <label for="developer">Developer</label>
+          <select type="text" class="form-control" id="developer" name="developer" ngModel required>
+            <option *ngFor="let developer of developers">{{developer._id}}</option> 
+            <!-- [value]="dev" -->
+          </select>
+        </div>
+        <div class="col-sm-4 form-group" *ngIf="editMode">
+          <label>Developer</label>
+          <input disabled type="text" class="form-control" id="developer" name="developer" ngModel required>
+          <!-- <p>{{name}}</p> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{ editMode ? 'update' : 'Add' }}</button>
+          <button class="btn btn-danger" type="button" (click)="onDelete()" *ngIf="editMode">Delete</button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <label for="developer">Developer</label> -->
+        <!-- <input type="search" id="developer" class="form-control" name="developer" ngModel required> -->
+        <!-- <ul class="list-group">
+                <a
+                class="list-group-item"
+                style="cursor: pointer"
+                *ngFor="let developer of developers; let i = index"
+                (click)="onEditItem(i)"
+              >
+              <input type="object" id="developer" class="form-control" name="developer" ngModel required>
+              <label>Developer:</label> {{ developer.name}}
+              </a>
+            </ul> -->
