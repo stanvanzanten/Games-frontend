@@ -68,7 +68,6 @@ export class LoginService {
     public loginUser(logins: Login) {
         return this.httpClient.post(this.serverUrl, { username: logins.username, password: logins.password })
             .pipe(tap((logins: any) => {
-                    console.log(logins.data.token);
                     this.token = logins.data.token
                 // // login successful if there's a jwt token in the response
                 // if (logins && logins.token) {
@@ -85,20 +84,6 @@ export class LoginService {
     signOut() {
         this.token = null
     }
-    // .toPromise()
-    // .then(() => {
-    //     console.log("user ingelogd")
-    //     this.getUsers()
-    //     .then(
-    //         logins => {
-    //             this.users = logins
-    //             this.usersChanged.next(this.users.slice());
-    //         }
-    //     )
-    //     .catch(error => console.log(error));
-    // })
-    // .catch(error => {return this.handleError(error)});
-
     private handleError(error: any): Promise<any> {
         console.log('handleError');
         return Promise.reject(error.message || error);

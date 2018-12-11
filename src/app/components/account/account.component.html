@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="row text-center">
+  <div class="col-xs-12">
+    <h1>Your account details</h1>
+  </div>
+</div>
+<div class="panel panel-default list-group-item text-center" style="cursor: pointer" *ngFor="let user of users; let i = index"
+      (click)="onEditItem(i)">
+      <table class="table">
+        <tr>
+          <th class="text-center">Firstname</th>
+          <th class="text-center">Lastname</th>
+          <th class="text-center">Username</th>
+        </tr>
+        <tr>
+          <td>{{ user.firstname }}</td>
+          <td>{{ user.lastname }}</td>
+          <td>{{ user.username }}</td>
+        </tr>
+      </table>
+    </div>

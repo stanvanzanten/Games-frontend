@@ -22,13 +22,15 @@ import { RegisterService } from './services/register.service';
 import { LoginService } from './services/login.service';
 import { DeveloperEditComponent } from './components/developers/developer-edit/developer-edit.component';
 import { LoggedInGuard } from './logged-in.gaurd';
+import { AccountComponent } from './components/account/account.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'games', component: GamesComponent},
-  {path:'developers',component: DevelopersComponent, canActivate:[LoggedInGuard]},
+  {path:'developers',component: DevelopersComponent},
   {path: 'signup', component : SignupComponent},
-  {path: 'login', component: LoginComponent} //, canActivate:['',LoggedInGuard]
+  {path: 'login', component: LoginComponent}, //, canActivate:[LoggedInGuard]
+  {path: 'account', component: AccountComponent, canActivate:[LoggedInGuard]}
 ];
 
 @NgModule({
@@ -41,7 +43,8 @@ const appRoutes: Routes = [
     GameEditComponent,
     SignupComponent,
     LoginComponent,
-    DeveloperEditComponent
+    DeveloperEditComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

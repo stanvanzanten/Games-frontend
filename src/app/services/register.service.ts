@@ -11,6 +11,7 @@ export class RegisterService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private serverUrl = environment.serverUrl + '/register'; // URL to web api
+    private userUrl = environment.serverUrl + '/user';
     private users: User[] = [];
     startedEditing = new Subject<number>();
     usersChanged = new Subject<User[]>();
@@ -21,7 +22,7 @@ export class RegisterService {
 
     public getUsers(): Promise<User[]>{
         console.log('user ophalen van de server');
-        return this.http.get(this.serverUrl,{headers: this.headers })
+        return this.http.get(this.userUrl,{headers: this.headers })
         .toPromise()
         .then(response => {
             console.dir(response.json());
@@ -35,7 +36,7 @@ export class RegisterService {
 
     public getUser(index: number): Promise<User> {
         console.log('User ophalen met id');
-        return this.http.get(this.serverUrl + '/' + this.users[index]._id, { headers: this.headers })
+        return this.http.get(this.userUrl + '/' + this.users[index]._id, { headers: this.headers })
             .toPromise()
             .then(response => {
                 console.dir(response.json());
