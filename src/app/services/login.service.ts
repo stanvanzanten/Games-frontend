@@ -4,21 +4,23 @@ import { environment } from '../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs'; ///Observable
 import { User } from '../models/user.model';
+import { Login } from '../models/login.model';
 import { Subject } from 'rxjs'; ///Subject
 import { headersToString } from 'selenium-webdriver/http';
-import { map } from 'rxjs/operators';
-
+import { map, mapTo, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class LoginService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private serverUrl = environment.serverUrl + '/login'; // URL to web api
+    private serverUrl = environment.serverUrl + '/authenticate'; // URL to web api
     private users: User[] = [];
     startedEditing = new Subject<number>();
     usersChanged = new Subject<User[]>();
+    public token: String = null
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private httpClient: HttpClient) {
 
     }
 
@@ -49,11 +51,11 @@ export class LoginService {
             });
     }
 
-    authenticateUser(user){
+    authenticateUser(user) {
         let headers = new Headers();
-        headers.append('Content-type','application/json');
-        return this.http.post(this.serverUrl, user, {headers: this.headers})
-        .toPromise()
+        headers.append('Content-type', 'application/json');
+        return this.http.post(this.serverUrl, user, { headers: this.headers })
+            .toPromise()
             .then(response => {
                 console.dir(response.json());
                 return response.json() as User;
@@ -62,23 +64,40 @@ export class LoginService {
                 return this.handleError(error);
             });
     }
-    public loginUser(users: User){
-        console.log('user inloggen');
-        this.http.post(this.serverUrl, {username: users.username, password: users.password})
-        .toPromise()
-        .then(() => {
-            console.log("user ingelogd")
-            this.getUsers()
-            .then(
-                users => {
-                    this.users = users
-                    this.usersChanged.next(this.users.slice());
-                }
-            )
-            .catch(error => console.log(error));
-        })
-        .catch(error => {return this.handleError(error)});
+
+    public loginUser(logins: Login) {
+        return this.httpClient.post(this.serverUrl, { username: logins.username, password: logins.password })
+            .pipe(tap((logins: any) => {
+                    console.log(logins.data.token);
+                    this.token = logins.data.token
+                // // login successful if there's a jwt token in the response
+                // if (logins && logins.token) {
+                //     // store user details and jwt token in local storage to keep user logged in between page refreshes
+                //     localStorage.setItem('currentUser', JSON.stringify(logins));
+                // }
+            }));
     }
+
+    isAuth() {
+        return this.token != null
+    }
+
+    signOut() {
+        this.token = null
+    }
+    // .toPromise()
+    // .then(() => {
+    //     console.log("user ingelogd")
+    //     this.getUsers()
+    //     .then(
+    //         logins => {
+    //             this.users = logins
+    //             this.usersChanged.next(this.users.slice());
+    //         }
+    //     )
+    //     .catch(error => console.log(error));
+    // })
+    // .catch(error => {return this.handleError(error)});
 
     private handleError(error: any): Promise<any> {
         console.log('handleError');

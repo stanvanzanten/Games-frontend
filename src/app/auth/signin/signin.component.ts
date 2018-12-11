@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { Login } from 'src/app/models/login.model';
 
 @Component({
   selector: 'app-signin',
@@ -39,6 +40,10 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
-    this.loginService.loginUser(this.editedItem);
+    const value = form.value;
+    const login = new Login(value.username, value.password)
+    this.loginService.loginUser(login).subscribe(() => {
+      this.router.navigate(['/'])
+    });
   }
 }

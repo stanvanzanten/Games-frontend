@@ -92,7 +92,8 @@ export class GameService {
 
     public addGame(games: Game) {
         console.log('game opslaan');
-        this.http.post(this.PostserverUrl + '/developer/' + games.developer._id + '/game', { imageUrl: games.imageUrl, name: games.name, releaseDate: games.releaseDate, genre: games.genre, description: games.description, developer: games.developer })
+        console.log(games.developer);
+        this.http.post(this.PostserverUrl + '/developer/' + games.developer + '/game', { imageUrl: games.imageUrl, name: games.name, releaseDate: games.releaseDate, genre: games.genre, description: games.description, developer: games.developer })
             .toPromise()
             .then(() => {
                 console.log("game toegevoegd")
