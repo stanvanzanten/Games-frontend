@@ -15,7 +15,6 @@ import { NgForm } from '@angular/forms';
 })
 export class GameEditComponent implements OnInit {
   developers: Developer[] = [
-    new Developer('arie', 34, [])
   ];
 
   @ViewChild("f") gameForm: NgForm;

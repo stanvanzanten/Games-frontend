@@ -15,7 +15,6 @@ import { DeveloperService } from 'src/app/services/developers.service';
 export class DeveloperEditComponent implements OnInit {
 
   developers: Developer[] = [
-    new Developer('arie', 34, [])
   ];
 
   @ViewChild("f") developerForm: NgForm;

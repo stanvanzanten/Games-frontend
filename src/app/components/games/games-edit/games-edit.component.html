@@ -30,7 +30,7 @@
           <label for="developer">Developer</label>
           <select type="text" class="form-control" id="developer" name="developer" ngModel required>
             <option *ngFor="let developer of developers">{{developer._id}}</option> 
-            <!-- [value]="dev" -->
+            
           </select>
         </div>
         <div class="col-sm-4 form-group" *ngIf="editMode">

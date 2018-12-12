@@ -11,6 +11,7 @@ export class DeveloperService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private serverUrl = environment.serverUrl + '/developer'; // URL to web api
+    private postServerUrl = environment.serverUrl;
     private developers: Developer[] = [];
     startedEditing = new Subject<number>();
     developersChanged = new Subject<Developer[]>();
@@ -90,7 +91,7 @@ export class DeveloperService {
 
     public addDeveloper(developers: Developer) {
         console.log('developers opslaan');
-        this.http.post(this.serverUrl, {name: developers.name, age: developers.age, games: developers.games})
+        this.http.post(this.postServerUrl + '/game/'+ developers.games._id +'/developer', {name: developers.name, age: developers.age, games: developers.games})
             .toPromise()
             .then(() => {
                 console.log("developers toegevoegd")

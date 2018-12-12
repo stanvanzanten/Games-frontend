@@ -12,7 +12,6 @@ import { LoginService } from '../../services/login.service';
 })
 export class GamesComponent implements OnInit{
     games : Game[] = [
-      new Game('image','Ed sheeran','23,09,1998','pop','Engelse zanger', new Developer('Arie',23,[]))
     ];
     id:number;
     subscription: Subscription
