@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'https://games-servers.herokuapp.com'
+  serverUrl: 'http://localhost:3000/api/v1'
 };
