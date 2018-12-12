@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'https://games-servers.herokuapp.com'
+  serverUrl: 'https://games-servers.herokuapp.com/'
 };
 
 /*
