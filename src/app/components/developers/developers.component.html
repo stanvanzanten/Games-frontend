@@ -7,24 +7,47 @@
   </div>
 </div>
 <div class="row text-center">
-  <div class="col-xs-4">
-    <div class="panel panel-default list-group-item" style="cursor: pointer" *ngFor="let developer of developers; let i = index"
-      (click)="onEditItem(i)">
-      <table class="table">
-        <tr>
-          <th class="text-center">Name</th>
-          <th class="text-center">Age</th>
-          <th class="text-center">Games</th>
-        </tr>
-        <tr>
-          <td>{{ developer.name }}</td>
-          <td>{{ developer.age }}</td>
-          <td>{{ developer.games }}</td>
-        </tr>
-      </table>
+  <ng-template [ngIf]="!loginService.isAuth()">
+    <div class="col-xs-12">
+      <div class="panel panel-default list-group-item" style="cursor: pointer" *ngFor="let developer of developers; let i = index"
+        (click)="onEditItem(i)">
+        <table class="table">
+          <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center">Age</th>
+            <th class="text-center">Games</th>
+          </tr>
+          <tr>
+            <td>{{ developer.name }}</td>
+            <td>{{ developer.age }}</td>
+            <td>{{ developer.games }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
-  </div>
-    <div class="col-xs-8">
+  </ng-template>
+  <ng-template [ngIf]="loginService.isAuth()">
+    <div class="col-xs-4">
+      <div class="panel panel-default list-group-item" style="cursor: pointer" *ngFor="let developer of developers; let i = index"
+        (click)="onEditItem(i)">
+        <table class="table">
+          <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center">Age</th>
+            <th class="text-center">Games</th>
+          </tr>
+          <tr>
+            <td>{{ developer.name }}</td>
+            <td>{{ developer.age }}</td>
+            <td>{{ developer.games }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+  <div class="col-xs-8">
+    <ng-template [ngIf]="loginService.isAuth()">
       <app-developer-edit></app-developer-edit>
-    </div>
+    </ng-template>
+  </div>
 </div>

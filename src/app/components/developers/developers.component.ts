@@ -3,6 +3,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import {Developer} from '../../models/developers.model'
 import {DeveloperService} from '../../services/developers.service'
 import { Subscription } from 'rxjs';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-developers',
@@ -16,7 +17,8 @@ export class DevelopersComponent implements OnInit{
     subscription: Subscription
 
     constructor(
-      private developersService: DeveloperService
+      private developersService: DeveloperService,
+      private loginService: LoginService
     ){}
 
     ngOnInit(){

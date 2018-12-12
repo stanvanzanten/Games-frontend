@@ -4,6 +4,7 @@ import {Game} from '../../models/games.model'
 import {GameService} from '../../services/games.service'
 import { Subscription } from 'rxjs';
 import { Developer } from 'src/app/models/developers.model';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-games',
@@ -17,7 +18,8 @@ export class GamesComponent implements OnInit{
     subscription: Subscription
 
     constructor(
-      private gamesService: GameService
+      private gamesService: GameService,
+      private loginService: LoginService
     ){}
 
     ngOnInit(){

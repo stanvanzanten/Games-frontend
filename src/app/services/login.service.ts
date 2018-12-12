@@ -21,7 +21,6 @@ export class LoginService {
     public token: String = null
 
     constructor(private http: Http, private httpClient: HttpClient) {
-
     }
 
     public getUsers(): Promise<User[]> {
@@ -84,6 +83,7 @@ export class LoginService {
     signOut() {
         this.token = null
     }
+
     private handleError(error: any): Promise<any> {
         console.log('handleError');
         return Promise.reject(error.message || error);

@@ -1,27 +1,36 @@
 <app-header></app-header>
 <div class="row text-left">
-  <div class="col-xs-6">
-    <ul class="list-group">
-      <a
-        class="list-group-item"
-        style="cursor: pointer"
-        *ngFor="let game of games; let i = index"
-        (click)="onEditItem(i)"
-      >
-        <img
-          [src]="game.imageUrl"
-          alt="{{ game.imageUrl }}"
-          class="img-responsive"
-          style="max-height: 100px; max-width: 150px"> 
-          <label>Naam:</label>  {{ game.name }} <br>
-          <label>ReleaseDate:</label>  {{game.releaseDate}} <br>
-          <label>Genre:</label>  {{game.genre}} <br>
-          <label>Description:</label>  {{game.description}} <br>
+  <ng-template [ngIf]="!loginService.isAuth()">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <a class="list-group-item" style="cursor: pointer" *ngFor="let game of games; let i = index" (click)="onEditItem(i)">
+          <img [src]="game.imageUrl" alt="{{ game.imageUrl }}" class="img-responsive" style="max-height: 100px; max-width: 150px">
+          <label>Naam:</label> {{ game.name }} <br>
+          <label>ReleaseDate:</label> {{game.releaseDate}} <br>
+          <label>Genre:</label> {{game.genre}} <br>
+          <label>Description:</label> {{game.description}} <br>
           <label>Developer:</label> {{game.developer}}
-      </a>
-    </ul>
-  </div>
-<div class="col-xs-6">
-          <app-game-edit></app-game-edit>
+        </a>
+      </ul>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="loginService.isAuth()">
+      <div class="col-xs-6">
+          <ul class="list-group">
+            <a class="list-group-item" style="cursor: pointer" *ngFor="let game of games; let i = index" (click)="onEditItem(i)">
+              <img [src]="game.imageUrl" alt="{{ game.imageUrl }}" class="img-responsive" style="max-height: 100px; max-width: 150px">
+              <label>Naam:</label> {{ game.name }} <br>
+              <label>ReleaseDate:</label> {{game.releaseDate}} <br>
+              <label>Genre:</label> {{game.genre}} <br>
+              <label>Description:</label> {{game.description}} <br>
+              <label>Developer:</label> {{game.developer}}
+            </a>
+          </ul>
+        </div>
+  </ng-template>
+  <div class="col-xs-6">
+    <ng-template [ngIf]="loginService.isAuth()">
+      <app-game-edit></app-game-edit>
+    </ng-template>
   </div>
 </div>
